@@ -1,0 +1,24 @@
+#api call for register a trainer
+###
+POST http://127.0.0.1:8000/accounts/register/trainer/
+Content-Type: application/json
+
+{
+  "username":"muhasina",
+  "email":"muhasina@gmail.com",
+  "password":"Password@123",
+  "phone":"9539430709"
+}
+
+#api call for register a student
+###
+POST http://127.0.0.1:8000/accounts/register/student/
+Content-Type: application/json
+
+{
+  "username":"ram",
+  "email":"ram@gmail.com",
+  "password":"Password@123",
+  "phone":"9539430708"
+}
+

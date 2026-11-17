@@ -1,6 +1,8 @@
 from django.db import models
+from django.db.models.signals import post_save
 
 from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 class User(AbstractUser):
@@ -50,5 +52,21 @@ class TrainerProfile(models.Model):
   
   updated_at = models.DateTimeField(auto_now=True)
   
+def create_student_profile(sender,instance,created,*args,**kwargs):
   
+  if created and instance.role=="student":
+    
+    StudentProfile.objects.create(student=instance)
+    
+post_save.connect(create_student_profile,sender=User)
+
+def create_trainer_profile(sender,instance,created,*args,**kwargs):
+  
+  if created and instance.role=="trainer":
+    
+    TrainerProfile.objects.create(trainer=instance)
+    
+post_save.connect(create_trainer_profile,sender=User)
+
+
   
