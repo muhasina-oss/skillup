@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.signals import post_save
-
+from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractUser
 
 
@@ -68,5 +68,18 @@ def create_trainer_profile(sender,instance,created,*args,**kwargs):
     
 post_save.connect(create_trainer_profile,sender=User)
 
+def send_invitation_mail(sender,instance,created,*args,**kwargs):
+  
+  if created:
+    
+    send_mail(
+      
+    "Account Creation Confirmation",
+    "You have successfully created account in SkillUp app",
+    "hussinmuhasina@gmail.com",
+    ["swalihph1@gmail.com"],
+    
+     )
 
+post_save.connect(send_invitation_mail,sender=User)
   
